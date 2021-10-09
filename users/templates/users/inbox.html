@@ -1,0 +1,26 @@
+ 
+ {% extends 'main.html' %}
+ 
+ {% block content %}
+ <!-- Main Section -->
+  <main class="inbox my-xl">
+    <div class="content-box">
+      <h3 class="inbox__title">New Messages(<span>{{unreadCount}}</span>)</h3>
+      <ul class="messages">
+      {% for messageRequest in messagesRequest %}
+      {% if messageRequest.is_read == False %}
+        <li class="message message--unread">
+        {% else %}
+        <li class="message message">
+        {% endif %}
+          <a href="{% url 'message' messageRequest.id %}">
+            <span class="message__author">{{messageRequest.name}}</span>
+            <span class="message__subject"> {{messageRequest.subject}}</span>
+            <span class="message__date">{{messageRequest.created}}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div> 
+  </main>
+  {% endblock content %}
